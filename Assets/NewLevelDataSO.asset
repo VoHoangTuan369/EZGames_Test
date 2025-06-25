@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f263316099a3c4a4ea794247a644dd8c, type: 3}
+  m_Name: NewLevelDataSO
+  m_EditorClassIdentifier: 
+  levelList:
+  - level: 1
+    enemyStat:
+      damage: 10
+      health: 100
+      energy: 100
+      attackSpeed: 1
+  - level: 2
+    enemyStat:
+      damage: 20
+      health: 200
+      energy: 100
+      attackSpeed: 0.75
+  - level: 3
+    enemyStat:
+      damage: 30
+      health: 300
+      energy: 100
+      attackSpeed: 0.5
