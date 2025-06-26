@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     private float minSwipeDistance = 50f;
 
-    [SerializeField] int attackStateCount;
     public StateManager stateManager;
 
 #if UNITY_EDITOR

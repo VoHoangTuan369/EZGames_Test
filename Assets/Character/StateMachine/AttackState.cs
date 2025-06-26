@@ -15,8 +15,12 @@ public class AttackState : BaseState
         Debug.Log("Entered Attack - ID: " + attackID);
         stateManager.animator.SetFloat("Attack_ID", attackID);
         stateManager.animator.SetTrigger("Attack");
+        stateManager.bodyCollider.isTrigger = false;
     }
     public override void Execute(StateManager stateManager) { }
-    public override void Exit(StateManager stateManager) { }
+    public override void Exit(StateManager stateManager) 
+    {
+        stateManager.bodyCollider.isTrigger = true;
+    }
     public override void OnCollisionEnter(StateManager stateManager, Collision collision) { }
 }

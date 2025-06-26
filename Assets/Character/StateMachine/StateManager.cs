@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    private BaseState currentState;
+    public BaseState currentState;
     public Animator animator;
     public Collider leftHandCollider;
     public Collider rightHandCollider;
