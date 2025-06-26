@@ -11,7 +11,7 @@ public class HandHit : MonoBehaviour
         {
             Debug.Log("Punch landed → Enemy takes damage!");
             // Gọi hàm gây sát thương
-            other.GetComponent<EnemyHealth>()?.TakeDamage(10);
+            other.transform.parent.GetComponent<EnemyHealth>()?.TakeDamage(10);
         }
     }
 }

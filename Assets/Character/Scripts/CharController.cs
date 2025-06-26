@@ -71,12 +71,12 @@ public class CharController : MonoBehaviour
             if (horizontal > 0)
             {
                 Debug.Log("Swipe Right → Attack");
-                stateManager.ChangeState(new AttackState((float)2/attackStateCount));
+                stateManager.ChangeState(new AttackState(2));
             }
             else
             {
                 Debug.Log("Swipe Left → Attack");
-                stateManager.ChangeState(new AttackState((float)1/attackStateCount));
+                stateManager.ChangeState(new AttackState(1));
             }
         }
         else
@@ -84,7 +84,7 @@ public class CharController : MonoBehaviour
             if (vertical > 0)
             {
                 Debug.Log("Swipe Up ↑ Attack");
-                stateManager.ChangeState(new AttackState((float)3/attackStateCount));
+                stateManager.ChangeState(new AttackState(3));
             }
             else
             {
