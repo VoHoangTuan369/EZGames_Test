@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandHit : MonoBehaviour
 {
-    public StateManager stateManager;
+    public StateMachine stateMachine;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
