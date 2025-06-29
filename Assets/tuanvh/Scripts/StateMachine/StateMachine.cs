@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine
+public class StateMachine : MonoBehaviour
 {
-    private BaseState currentState;
-    public Animator animator;
+    public BaseState CurrentState;
+    public Animator Animator;
     
     public StateMachine(){}
     
     public StateMachine(Animator animator)
     {
-        this.animator = animator;
+        this.Animator = animator;
     }
 
     public void InitializeState(BaseState initialState)
     {
-        currentState = initialState;
+        CurrentState = initialState;
         initialState.Enter(this);
     }
 
     public void ChangeState(BaseState newState)
     {
-        currentState?.Exit(this);
-        currentState = newState;
-        currentState.Enter(this);
+        CurrentState?.Exit(this);
+        CurrentState = newState;
+        CurrentState.Enter(this);
+    }
+    public void TransitionToIdle()
+    {
+        ChangeState(new IdleState());
     }
 }

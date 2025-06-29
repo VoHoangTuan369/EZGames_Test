@@ -1,18 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : BaseState
+public class WinState : BaseState
 {
     public override void Enter(StateMachine stateMachine)
     {
-        // Debug.Log("Entered Idle");
-        //stateMachine.animator.SetTrigger("Idle");
         base.Enter(stateMachine);
-    }
+        stateMachine.Animator.SetTrigger("Win");
 
+        //stateMachine.Invoke("TransitionToIdle", 1.0f);
+    }
     public override void Exit(StateMachine stateMachine)
     {
-        //Debug.Log("Exit Idle");
         base.Exit(stateMachine);
     }
-
 }

@@ -14,11 +14,11 @@ public class CharacterHand : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Character otherCharacter = other.GetComponentInParent<Character>();
-        if (!otherCharacter)
+        if (character.StateMachine.CurrentState is not AttackState)
         {
             return;
         }
+        Character otherCharacter = other.GetComponentInParent<Character>();
         if (character.HitCharacters.Contains(otherCharacter))
         {
             return;
@@ -30,19 +30,23 @@ public class CharacterHand : MonoBehaviour
                 if (otherCharacter.type == CharacterType.Enemy)
                 {
                     Debug.Log("Hit Enemy");
-                    character.HitCharacters.Add(otherCharacter);
-                    otherCharacter.TakeDamage(character.Damage);
+                    HitHandle(otherCharacter);
                 }
                 break;
             case CharacterType.Enemy:
                 if (otherCharacter.type == CharacterType.Player)
                 {
                     Debug.Log("Hit Player");
-                    character.HitCharacters.Add(otherCharacter);
+                    HitHandle(otherCharacter);
                 }
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
+    }
+
+    private void HitHandle(Character otherCharacter)
+    {
+        int id = character.AttackID;
+        character.HitCharacters.Add(otherCharacter);
+        otherCharacter.OnCharacterHasBeenHit?.Invoke(id, character.Damage);
     }
 }

@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     private float minSwipeDistance = 50f;
 
     public Action<int> OnAttacking;
-    public Action OnDodging;
+    public Action<int> OnDodging;
+    public PlayerState CurrentState { get; private set; } = PlayerState.Idle;
 
 #if UNITY_EDITOR
     void Update()
@@ -59,6 +60,7 @@ public class CharacterController : MonoBehaviour
         {
             // Tap
             Debug.Log("Tap detected");
+            CurrentState = PlayerState.Attacking;
             OnAttacking?.Invoke(0);
             return;
         }
@@ -72,12 +74,14 @@ public class CharacterController : MonoBehaviour
             if (horizontal > 0)
             {
                 Debug.Log("Swipe Right → Attack");
-                OnAttacking?.Invoke(3);
+                CurrentState = PlayerState.Attacking;
+                OnAttacking?.Invoke(2);
             }
             else
             {
                 Debug.Log("Swipe Left → Attack");
-                OnAttacking?.Invoke(2);
+                CurrentState = PlayerState.Attacking;
+                OnAttacking?.Invoke(3);
             }
         }
         else
@@ -85,13 +89,22 @@ public class CharacterController : MonoBehaviour
             if (vertical > 0)
             {
                 Debug.Log("Swipe Up ↑ Attack");
+                CurrentState = PlayerState.Attacking;
                 OnAttacking?.Invoke(1);
             }
             else
             {
                 Debug.Log("Swipe Down ↓ Defend");
-                OnDodging?.Invoke();
+                CurrentState = PlayerState.Dodging;
+                OnDodging?.Invoke(0);
             }
         }
     }
+}
+public enum PlayerState
+{
+    Idle,
+    Attacking,
+    Defending,
+    Dodging
 }

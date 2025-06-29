@@ -1,9 +1,16 @@
 using System;
 using UnityEngine;
 
-public abstract class BaseState
+public class BaseState
 {
-    public abstract void Enter(StateMachine stateMachine);
-    public abstract void Execute(StateMachine stateMachine);
-    public abstract void Exit(StateMachine stateMachine);
+    public Action OnStateEnter;
+    public Action OnStateExit;
+    public virtual void Enter(StateMachine stateMachine)
+    {
+        OnStateEnter?.Invoke();
+    }
+    public virtual void Exit(StateMachine stateMachine)
+    {
+        OnStateExit?.Invoke();
+    }
 }

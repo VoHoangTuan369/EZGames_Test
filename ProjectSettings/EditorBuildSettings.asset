@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TuanVH/Scenes/LevelScene.unity
+    guid: 9b110be273804464390dedb6ae0bcd5c
+  - enabled: 1
+    path: Assets/TuanVH/Scenes/GameplayScene.unity
+    guid: c850ee8c3b14cc8459e7e186857cf567
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 998e9352e1e92c4488e7bcb6cd6a692a,
       type: 2}

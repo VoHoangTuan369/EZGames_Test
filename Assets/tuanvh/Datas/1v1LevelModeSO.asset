@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: 1v1LevelModeSO
   m_EditorClassIdentifier: 
   levels:
-  - level: 0
+  - level: 1
     enemyStat:
-      damage: 0
-      health: 0
+      damage: 10
+      health: 50
       attackSpeed: 0
-  - level: 0
+  - level: 2
     enemyStat:
-      damage: 0
-      health: 0
+      damage: 10
+      health: 50
       attackSpeed: 0
-  - level: 0
+  - level: 3
     enemyStat:
-      damage: 0
-      health: 0
+      damage: 10
+      health: 50
       attackSpeed: 0
