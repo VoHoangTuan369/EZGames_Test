@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
 
     public CharacterStat Data { get => data; set => data = value; }
 
-    public Action<int, float> OnCharacterHasBeenHit;
+    public Action<int, int> OnGetHit;
     public Action<int> OnHealthChanged;
 
     CharacterStat data;
@@ -39,27 +39,25 @@ public class Character : MonoBehaviour
     {
         stateMachine = GetComponent<StateMachine>();
         stateMachine.InitializeState(new IdleState());
-        if (type == CharacterType.Player)
-        {
-            controller = FindObjectOfType<PlayerController>();
-        }
+        controller = FindObjectOfType<PlayerController>();
     }
 
     private void Start()
     {
-        OnCharacterHasBeenHit += OnCharHasBeenHit;
         if (type != CharacterType.Player) return;
         controller.OnAttacking += OnCharacterAttacked;
         controller.OnDodging += OnCharacterDodged;
-        
+        controller.OnResting += OnCharacterRested;
+        controller.OnAttackCanceled += OnCharacterAttackCanceled;
     }
 
     private void OnDisable()
     {
-        OnCharacterHasBeenHit -= OnCharHasBeenHit;
         if (type != CharacterType.Player) return;
         controller.OnAttacking -= OnCharacterAttacked;
         controller.OnDodging -= OnCharacterDodged;
+        controller.OnResting -= OnCharacterRested;
+        controller.OnAttackCanceled -= OnCharacterAttackCanceled;
     }
 
     public void TakeDamage(float damage)
@@ -75,25 +73,37 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void OnCharacterAttacked(int id)
+    private void OnCharacterAttacked(int attackID)
     {
-        AttackID = id;
-        AttackState attackState = new AttackState(id, hitCharacters);
-        stateMachine.ChangeState(attackState);
+        Debug.Log("Attackkk");
+        AttackID = attackID;
+        if (stateMachine.CurrentState is AttackState)
+        {
+            AttackState attackState = (AttackState)stateMachine.CurrentState;
+            attackState.Speed = data.agility;
+        }
+        //AttackState attackState = new AttackState(id);
+        //stateMachine.ChangeState(attackState);
     }
     
-    private void OnCharacterDodged(int id)
+    private void OnCharacterDodged()
     {
-        stateMachine.ChangeState(new DodgeState(id));
+        Debug.Log("Dodgeee");
+        //stateMachine.ChangeState(new DodgeState(id));
     }
 
-    private void OnCharHasBeenHit(int id, float comingDamage)
+    private void OnCharacterRested()
     {
-        //Debug.Log("Hitttt");
-        StartCoroutine(DelayedHit(id, comingDamage));
+        Debug.Log("Resting");
+        //stateMachine.ChangeState(new IdleState());
     }
 
-
+    private void OnCharacterAttackCanceled()
+    {
+        Debug.Log("Ca");
+        HitCharacters.Clear();
+    }
+    
     private IEnumerator DelayedHit(int id, float comingDamage)
     {
         float secondDelay;
@@ -110,7 +120,7 @@ public class Character : MonoBehaviour
                 break;
         }
         yield return new WaitForSeconds(secondDelay); // thời gian delay ở đây là 0.5 giây
-        stateMachine.ChangeState(new HitState(id));
+        stateMachine.ChangeState(new HitState(){HitID = id});
         TakeDamage(Damage);
     }
 

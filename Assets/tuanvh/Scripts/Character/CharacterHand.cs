@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum HandType
+{
+    Left, Right
+}
+
 public class CharacterHand : MonoBehaviour
 {
+    public HandType handType;
     private Character character;
-    
     
     private void Start()
     {
@@ -18,12 +23,42 @@ public class CharacterHand : MonoBehaviour
         {
             return;
         }
+
+        HandType triggerHandType = HandType.Left;
+        
+        if (character.StateMachine.CurrentState is AttackState attackState)
+        {
+            switch (attackState.AttackID)
+            {
+                case 0:
+                    triggerHandType = HandType.Right;
+                    break;
+                case 1:
+                    triggerHandType = HandType.Left;
+                    break;
+                case 2:
+                    triggerHandType = HandType.Left;
+                    break;
+                case 3:
+                    triggerHandType = HandType.Right;
+                    break;
+            }
+        }
+
+        if (triggerHandType != handType)
+        {
+            Debug.Log("Hit other hand: " + handType);
+            return;
+        }
+        
         Character otherCharacter = other.GetComponentInParent<Character>();
         if (character.HitCharacters.Contains(otherCharacter))
         {
             return;
         }
 
+        character.StateMachine.Animator.speed = 1;
+        
         switch (character.type)
         {
             case CharacterType.Player:
@@ -47,6 +82,6 @@ public class CharacterHand : MonoBehaviour
     {
         int id = character.AttackID;
         character.HitCharacters.Add(otherCharacter);
-        otherCharacter.OnCharacterHasBeenHit?.Invoke(id, character.Damage);
+        otherCharacter.OnGetHit?.Invoke(id, (int)character.Damage);
     }
 }

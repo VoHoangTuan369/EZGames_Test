@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d8a7e968a7dd43b8b37221ef77d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handType: 1
 --- !u!135 &193777284
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -235,7 +236,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
+  m_Radius: 0.06
   m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!1001 &210908971
 PrefabInstance:
@@ -328,6 +329,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1843647599}
+    - targetCorrespondingSourceObject: {fileID: 7421653487955196459, guid: 775cd3b427d63974d8703d8fc87cc3ce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1843647603}
     - targetCorrespondingSourceObject: {fileID: 7421653487955196459, guid: 775cd3b427d63974d8703d8fc87cc3ce,
         type: 3}
       insertIndex: -1
@@ -441,6 +446,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2122972254015428975, guid: 6e70ac2dd964f7e4798ba322509c7e7a,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 237985484}
+    - targetCorrespondingSourceObject: {fileID: 2122972254015428975, guid: 6e70ac2dd964f7e4798ba322509c7e7a,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 237985482}
     - targetCorrespondingSourceObject: {fileID: 2211893352704014900, guid: 6e70ac2dd964f7e4798ba322509c7e7a,
         type: 3}
@@ -512,7 +521,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f557df15ee2c16240b509a733fe0d45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 
   Animator: {fileID: 237985478}
+--- !u!114 &237985484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237985475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d0615502ca6914da92b635cefd8b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHandCollider: {fileID: 605855583}
+  RightHandCollider: {fileID: 1176520065}
 --- !u!1 &312562952
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d8a7e968a7dd43b8b37221ef77d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handType: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d8a7e968a7dd43b8b37221ef77d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handType: 0
 --- !u!135 &1039922820
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1004,7 +1030,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
+  m_Radius: 0.06
   m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!1 &1176520063 stripped
 GameObject:
@@ -1045,6 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d8a7e968a7dd43b8b37221ef77d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handType: 1
 --- !u!1001 &1236559162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1182,6 +1209,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UIBattleScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8032300805133220626, guid: 416888110a4a014408b8c6f03cffcc1a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864418740281478196, guid: 416888110a4a014408b8c6f03cffcc1a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864418740281478196, guid: 416888110a4a014408b8c6f03cffcc1a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864418740281478196, guid: 416888110a4a014408b8c6f03cffcc1a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1326,6 +1373,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c0a2fd3e214cc47bad267e9c0497f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delta: {x: 0, y: 0}
+  animationClips: []
+  actionTimer: 0
+  actionDuration: 1
+  CharacterCollider: {fileID: 237985484}
+  StateMachine: {fileID: 237985482}
 --- !u!4 &1760117511
 Transform:
   m_ObjectHideFlags: 0
@@ -1355,6 +1408,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 237985480}
   enemy: {fileID: 1843647599}
+  aggressiveness: 0.511
+  defensiveness: 0.5
+  reactionTime: 1
+  decisionCooldown: 0.5
+  enableDebugLogs: 1
+  enableManualTesting: 1
+  animationClips: []
+  actionTimer: 0
+  actionDuration: 1
+  lastDecisionTime: 0
 --- !u!1 &1807245963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,4 +1565,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f557df15ee2c16240b509a733fe0d45d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateName: 
   Animator: {fileID: 1843647597}
+--- !u!114 &1843647603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843647593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d0615502ca6914da92b635cefd8b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHandCollider: {fileID: 1039922820}
+  RightHandCollider: {fileID: 193777284}

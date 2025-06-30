@@ -5,14 +5,12 @@ using UnityEngine;
 public class WinState : BaseState
 {
     public override void Enter(StateMachine stateMachine)
-    {
-        base.Enter(stateMachine);
+    { ;
         stateMachine.Animator.SetTrigger("Win");
 
         //stateMachine.Invoke("TransitionToIdle", 1.0f);
     }
     public override void Exit(StateMachine stateMachine)
     {
-        base.Exit(stateMachine);
     }
 }

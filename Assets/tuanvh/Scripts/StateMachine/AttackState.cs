@@ -1,35 +1,32 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AttackState : BaseState
 {
-    private float attackID;
+    public int AttackID;
+    public float Speed;
     
-    private List<Character> hitCharacters;
-
-    public AttackState(float id, List<Character> hitCharacters)
-    {
-        Debug.Log("id: " + id);
-        attackID = id;
-        this.hitCharacters = hitCharacters;
-    }
-
+    private bool isAttacking;
+    
     public override void Enter(StateMachine stateMachine)
     {
-        //Debug.Log("Entered Attack - ID: " + attackID);
         base.Enter(stateMachine);
-        stateMachine.Animator.SetFloat("Attack_ID", attackID);
+        stateMachine.Animator.SetFloat("Attack_ID", AttackID);
+        stateMachine.Animator.speed = Speed;
         stateMachine.Animator.SetTrigger("Attack");
+    }
 
-        stateMachine.Invoke("TransitionToIdle", 1.0f);
+    public override void Execute(StateMachine stateMachine)
+    {
+        base.Execute(stateMachine);
     }
 
     public override void Exit(StateMachine stateMachine)
     {
-        Debug.Log("Exit Attack");
         base.Exit(stateMachine);
-        hitCharacters.Clear();
-        //stateMachine.ChangeState(new IdleState());
     }
+
 }

@@ -14,5 +14,5 @@ public class CharacterStat
 {
     public float damage;
     public float health;
-    public float attackSpeed;
+    public float agility;
 }

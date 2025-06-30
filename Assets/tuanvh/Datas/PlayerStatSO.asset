@@ -15,4 +15,4 @@ MonoBehaviour:
   characterStat:
     damage: 10
     health: 50
-    attackSpeed: 0
+    agility: 1

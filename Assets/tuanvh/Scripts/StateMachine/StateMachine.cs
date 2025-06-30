@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    [SerializeField]
+    private string stateName;
     public BaseState CurrentState;
     public Animator Animator;
     
@@ -12,6 +15,11 @@ public class StateMachine : MonoBehaviour
     public StateMachine(Animator animator)
     {
         this.Animator = animator;
+    }
+
+    private void Update()
+    {
+        CurrentState?.Execute(this);
     }
 
     public void InitializeState(BaseState initialState)
@@ -24,10 +32,7 @@ public class StateMachine : MonoBehaviour
     {
         CurrentState?.Exit(this);
         CurrentState = newState;
+        stateName = newState.ToString();
         CurrentState.Enter(this);
-    }
-    public void TransitionToIdle()
-    {
-        ChangeState(new IdleState());
     }
 }

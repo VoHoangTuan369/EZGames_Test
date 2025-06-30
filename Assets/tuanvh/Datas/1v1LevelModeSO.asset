@@ -17,14 +17,14 @@ MonoBehaviour:
     enemyStat:
       damage: 10
       health: 50
-      attackSpeed: 0
+      agility: 3
   - level: 2
     enemyStat:
       damage: 10
       health: 50
-      attackSpeed: 0
+      agility: 3
   - level: 3
     enemyStat:
       damage: 10
       health: 50
-      attackSpeed: 0
+      agility: 3
