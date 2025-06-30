@@ -45,6 +45,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         if (type != CharacterType.Player) return;
+        OnGetHit += OnHitCharacter;
         controller.OnAttacking += OnCharacterAttacked;
         controller.OnDodging += OnCharacterDodged;
         controller.OnResting += OnCharacterRested;
@@ -54,6 +55,7 @@ public class Character : MonoBehaviour
     private void OnDisable()
     {
         if (type != CharacterType.Player) return;
+        OnGetHit -= OnHitCharacter;
         controller.OnAttacking -= OnCharacterAttacked;
         controller.OnDodging -= OnCharacterDodged;
         controller.OnResting -= OnCharacterRested;
@@ -71,6 +73,17 @@ public class Character : MonoBehaviour
             
             StateMachine.ChangeState(new LoseState());
         }
+    }
+
+    private void OnHitCharacter(int id, int damage)
+    {
+        controller.OnHitting?.Invoke(id);
+        if (stateMachine.CurrentState is HitState)
+        {
+            HitState hitState = (HitState)stateMachine.CurrentState;
+            
+        }
+        TakeDamage(damage);
     }
 
     private void OnCharacterAttacked(int attackID)
@@ -104,26 +117,6 @@ public class Character : MonoBehaviour
         HitCharacters.Clear();
     }
     
-    private IEnumerator DelayedHit(int id, float comingDamage)
-    {
-        float secondDelay;
-        switch (id) 
-        {
-            case 0:
-                secondDelay = 0.4f;
-                break;
-            case 3:
-                secondDelay = 0.9f;
-                break;
-            default:
-                secondDelay = 0.65f;
-                break;
-        }
-        yield return new WaitForSeconds(secondDelay); // thời gian delay ở đây là 0.5 giây
-        stateMachine.ChangeState(new HitState(){HitID = id});
-        TakeDamage(Damage);
-    }
-
     public void SetStat(CharacterStat _data)
     {
         data = _data;

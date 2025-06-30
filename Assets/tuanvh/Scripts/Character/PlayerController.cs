@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
 
     public Action OnAttackCanceled;
     
-    public CharacterCollider CharacterCollider;
     public StateMachine StateMachine;
     private Character character;
     
@@ -218,7 +217,7 @@ public class PlayerController : MonoBehaviour
         return id switch
         {
             0 or 1 => animationClips.FirstOrDefault(obj => obj.name == "Dodging Back")!.length,
-            2 or 3 => animationClips.FirstOrDefault(obj => obj.name == "Dodging L")!.length,
+            2 or 3 => animationClips.FirstOrDefault(obj => obj.name == "Dodge L")!.length,
             _ => 0f
         };
     }
